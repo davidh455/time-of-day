@@ -42,10 +42,11 @@
     <main>
 	 <header><h3>A JavaScript Project by David Hoang</h3></header>
 	 <h3 id="my-greeting">Greeting Goes Here.</h3>
-	    <p>Explain what your page does and how it works here!</p>
-	  <img src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
+	    <p>This page will check what day and time it is using your computer's local time.</p>
+		<p>It will use the time to change the background color and image displayed on the right.</p>
+	  <img id="time-image"src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
      <footer>
-      <p><small>&copy; 2022 by 
+      <p><small>&copy; 2024-<span id="this-year"></span> by 
           David Hoang, All Rights Reserved ~ 
           <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
           <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
@@ -67,22 +68,36 @@
 	myHour = myDate.getHours();
 
 
-	if(myHour < 12){
-		//alert("good morning?");
-		mySentence = "Good Morning!"
-		myColor = "orange";
-	}else{
-		//alert("good afternoon?");
-		mySentence = "Good Afternoon!"
-		myColor = "green";
+	if (myHour >= 5 && myHour < 12) {
+		// Morning
+		myColor = "#87CEEB";
+		mySentence = "Good Morning!";
+		image = "images/morning.jpg";
+	} else if (myHour >= 12 && myHour < 18) {
+		// Afternoon
+		myColor = "#32CD32";
+		mySentence = "Good Afternoon!";
+		image = "images/afternoon.jpg";
+	} else if (myHour >= 18 && myHour < 23) {
+		// Evening
+		myColor = "#FA5F55";
+		mySentence = "Good Evening!";
+		image = "images/evening.jpg";
+	} else {
+		// Night
+		myColor = "#280137";
+		mySentence = "Good Night!";
+		image = "images/night.jpg";
 	}
 
 	document.getElementById("my-greeting").innerHTML = mySentence;
 	document.body.style.backgroundColor = myColor;
 
+	document.getElementById("time-image").src = image;
+	document.getElementsByClassName("time-image").alt = mySentence;
 
-
-
+	// Display the current year in the footer for copyright example: 2024 - (present time)
+	document.getElementById("this-year").textContent = myDate.getFullYear();
 
 
 
